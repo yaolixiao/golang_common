@@ -10,45 +10,45 @@ import (
 )
 
 type BaseConf struct {
-	DebugMode    string
-	TimeLocation string
-	Log 		 LogConfig
+	DebugMode    string `mapstructure:"debug_mode"`
+	TimeLocation string`mapstructure:"time_location"`
+	Log 		 LogConfig `mapstructure:"log"`
 	Base 		 struct {
-		DebugMode 	 string
-		TimeLocation string
-	}
+		DebugMode 	 string `mapstructure:"debug_mode"`
+		TimeLocation string `mapstructure:"time_location"`
+	} `mapstructure:"base"`
 }
 
 type LogConfFileWriter struct {
-	On 				bool
-	LogPath 		string
-	RotateLogPath 	string
-	WfLogPath 		string
-	RotateWfLogPath string
+	On 				bool `mapstructure:"on"`
+	LogPath 		string `mapstructure:"log_path"`
+	RotateLogPath 	string `mapstructure:"rotate_log_path"`
+	WfLogPath 		string `mapstructure:"wf_log_path"`
+	RotateWfLogPath string `mapstructure:"rotate_wf_log_path"`
 }
 
 type LogConfConsoleWriter struct {
-	On 	  bool
-	Color bool
+	On 	  bool `mapstructure:"on"`
+	Color bool `mapstructure:"color"`
 }
 
 type LogConfig struct {
-	Level string
-	FW LogConfFileWriter
-	CW LogConfConsoleWriter
+	Level string `mapstructure:"log_level"`
+	FW LogConfFileWriter `mapstructure:"file_writer"`
+	CW LogConfConsoleWriter `mapstructure:"console_writer"`
 }
 
 type RedisMapConf struct {
-	List map[string]*RedisConf
+	List map[string]*RedisConf `mapstructure:"list"`
 }
 
 type RedisConf struct {
-	ProxyList 	 []string
-	Password  	 string
-	Db 		  	 int
-	ConnTimeout  int
-	ReadTimeout  int
-	WriteTimeout int
+	ProxyList 	 []string `mapstructure:"proxy_list"`
+	Password  	 string `mapstructure:"password"`
+	Db 		  	 int `mapstructure:"db"`
+	ConnTimeout  int `mapstructure:"conn_timeout"`
+	ReadTimeout  int `mapstructure:"read_timeout"`
+	WriteTimeout int `mapstructure:"write_timeout"`
 }
 
 var ConfBase *BaseConf
