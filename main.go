@@ -9,11 +9,12 @@ import (
 func main() {
 
 	// 测试资源初始化
-	err := lib.Init("./conf/dev/")
-	if err != nil {
-		fmt.Printf("main init fail. err=%v\n", err)
+	if err := lib.Init("./conf/dev/"); err != nil {
+		fmt.Printf("main init fail. ~~~ err=%v\n", err)
 		return
 	}
+
+	fmt.Println("init success.")
 	fmt.Println("ConfEnvPath=", lib.ConfEnvPath)
 	fmt.Println("ConfEnv=", lib.ConfEnv)
 
