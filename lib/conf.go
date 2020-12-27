@@ -11,7 +11,7 @@ import (
 
 type BaseConf struct {
 	DebugMode    string `mapstructure:"debug_mode"`
-	TimeLocation string`mapstructure:"time_location"`
+	TimeLocation string `mapstructure:"time_location"`
 	Log 		 LogConfig `mapstructure:"log"`
 	Base 		 struct {
 		DebugMode 	 string `mapstructure:"debug_mode"`
@@ -149,4 +149,28 @@ func InitRedisConf(path string) error {
 	redisMap["default"] = ConfRedis
 	ConfRedisMap.List = redisMap
 	return nil
+}
+
+// 获取配置信息
+func GetStringConf(key string) string {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return ""
+	}
+	v, ok := ViperConfMap[keys[0]]
+	if !ok {
+		return ""
+	}
+	return v.GetString(strings.Join(keys[1:len(keys)], "."))
+}
+
+// 获取配置信息
+func GetIntConf(key string) int {
+	keys := strings.Split(key, ".")
+	l := len(keys)
+	if l < 2 {
+		return 0
+	}
+	v := ViperConfMap[keys[0]]
+	return v.GetInt(strings.Join(keys[1:l], "."))
 }

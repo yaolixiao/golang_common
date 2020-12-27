@@ -7,6 +7,7 @@ import (
 	"net"
 	"fmt"
 	"time"
+	dlog "github.com/yaolixiao/golang_common/log"
 )
 
 var TimeLocation *time.Location
@@ -75,6 +76,14 @@ func InitModule(configPath string, modules []string) error {
 
 	log.Println("[INFO] success loading config.")
 	return nil
+}
+
+// 公共销毁函数
+func Destroy() {
+	log.Printf("[INFO] %s\n", " start destroy resources.")
+	// CloseDB() // todo
+	dlog.Close()
+	log.Printf("[INFO] %s\n", " success destroy resources.")
 }
 
 // 获取本地IP
