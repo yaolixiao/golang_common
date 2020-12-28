@@ -24,6 +24,11 @@ func ParseConfPath(confPath string) error {
 	return nil
 }
 
+//获取配置环境名
+func GetConfEnv() string{
+	return ConfEnv
+}
+
 func GetConfPath(fileName string) string {
 	return ConfEnvPath + "/" + fileName + ".toml"
 }
