@@ -1,12 +1,16 @@
 package lib
 
 import (
+	"bytes"
 	"log"
 	"flag"
 	"os"
 	"net"
 	"fmt"
 	"time"
+	"encoding/binary"
+	"encoding/hex"
+	"math/rand"
 	dlog "github.com/yaolixiao/golang_common/log"
 )
 
