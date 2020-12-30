@@ -69,7 +69,12 @@ func InitModule(configPath string, modules []string) error {
 		}
 	}
 
-	// 加载mysql配置 todo
+	// 加载mysql配置
+	if InArrayString("mysql", modules) {
+		if err := InitDBPool(GetConfPath("mysql_map")); err != nil {
+			fmt.Printf("[ERROR] %s %s\n", time.Now().Format(TimeFormat), " InitDBPool:" + err.Error())
+		}
+	}
 
 	// 设置时区
 	if location, err := time.LoadLocation(ConfBase.TimeLocation); err != nil {

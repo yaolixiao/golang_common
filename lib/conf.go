@@ -4,6 +4,8 @@ import (
 	"os"
 	"github.com/spf13/viper"
 	dlog "github.com/yaolixiao/golang_common/log"
+	"github.com/yaolixiao/gorm"
+	"database/sql"
 	"io/ioutil"
 	"bytes"
 	"strings"
@@ -51,9 +53,25 @@ type RedisConf struct {
 	WriteTimeout int `mapstructure:"write_timeout"`
 }
 
+type MysqlMapConf struct {
+	List map[string]*MySQLConf `mapstructure:"list"`
+}
+
+type MySQLConf struct {
+	DriverName string `mapstructure:"list"`
+	DataSourceName string `mapstructure:"data_source_name"`
+	MaxOpenConn int `mapstructure:"max_open_conn"`
+	MaxIdleConn int `mapstructure:"max_idle_conn"`
+	MaxConnLifeTime int `mapstructure:"max_conn_life_time"`
+}
+
 var ConfBase *BaseConf
 var ConfRedis *RedisConf
 var ConfRedisMap *RedisMapConf
+var DBMapPool map[string]*sql.DB
+var GORMMapPool map[string]*gorm.DB
+var DBDefaultPool *sql.DB
+var GORMDefaultPool *gorm.DB
 var ViperConfMap map[string]*viper.Viper
 
 // 初始化配置文件
